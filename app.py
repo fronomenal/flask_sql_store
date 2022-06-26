@@ -7,6 +7,9 @@ app = Flask(__name__)
 def index():
     return render_template("index.html")
 
+@app.route("/catalog")
+def catalog():
+    return render_template("catalog.html")
 
 if __name__ == "__main__":
     app.run(host="localhost", port=8080, debug=True)
