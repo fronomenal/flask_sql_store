@@ -1,0 +1,8 @@
+setup.py
+app/__init__.py
+app/config.py
+flakstore.egg-info/PKG-INFO
+flakstore.egg-info/SOURCES.txt
+flakstore.egg-info/dependency_links.txt
+flakstore.egg-info/requires.txt
+flakstore.egg-info/top_level.txt
