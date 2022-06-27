@@ -12,6 +12,7 @@ class Config(object):
 
 
 class ProdCon(Config):
+    FLASK_ENV = 'production'
     DEBUG = False
 
 
@@ -21,6 +22,7 @@ class StageCon(Config):
 
 
 class DevCon(Config):
+    FLASK_ENV = 'development'
     DEVELOPMENT = True
     DEBUG = True
 

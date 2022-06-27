@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from app.controllers.middlewares.logger import LogMiddleware
 
 server = Flask(__name__)
-server.config.from_object(os.getenv('APP_SETTINGS', "app.config.DevCon"))
+server.config.from_object(os.getenv('APP_SETTINGS', 'app.config.DevCon'))
 db = SQLAlchemy(server)
 
 
