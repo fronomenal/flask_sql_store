@@ -9,6 +9,6 @@ setup(
         'flask-sqlalchemy',
         'gunicorn',
         'flask-migrate',
-        'pyscopg2'
+        'psycopg2-binary'
     ],
 )
