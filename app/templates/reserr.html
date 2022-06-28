@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Return</title>
+{% endblock %}
+
+{% block home_nav %}<span class="sr-only">(current)</span>{% endblock %}
+
+{% block main %}
+<h2>{{err["stat"]}} : {{err["msg"]}}</h2>
+
+<p><a href="{{ url_for('index') }}">Home Page</a></p>
+
+
+{% endblock %}
