@@ -9,6 +9,7 @@ db = SQLAlchemy(server)
 
 
 from app.models.Item import Item
+from app.models.User import User
 
 server.wsgi_app = LogMiddleware(server.wsgi_app)
 
