@@ -7,6 +7,8 @@ setup(
     install_requires=[
         'flask',
         'flask-sqlalchemy',
-        'gunicorn'
+        'gunicorn',
+        'flask-wtf',
+        'wtforms[email]'
     ],
 )

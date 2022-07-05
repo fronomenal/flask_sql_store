@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>Sign Up</title>
+{% endblock %}
+
+{% block register_nav %}<span class="sr-only">(current)</span>{% endblock %}
+
+{% block main %}
+<form action="" method="post" class="form-register" style="color:white;">
+    <section class="container text-center">
+        {{ form.hidden_tag() }}
+        <br>
+        <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
+        {{ form.username.label(for="name-field") }}
+        {{ form.username(class="form-control", placeholder="User Name", id="name-field") }}
+        {% if form.username.errors %}
+          <ul class="errors">
+            {% for error in form.username.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        {{ form.email.label(for="email-field") }}
+        {{ form.email(class="form-control", placeholder="User Email", id="email-field") }}
+        {% if form.email.errors %}
+          <ul class="errors">
+            {% for error in form.email.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        {{ form.password1.label(for="password-field") }}
+        {{ form.password1(class="form-control", placeholder="User Password", id="password-field") }}
+        {% if form.password1.errors %}
+          <ul class="errors">
+            {% for error in form.password1.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+        {{ form.password2.label(for="cpassword-field") }}
+        {{ form.password2(class="form-control", placeholder="Repeat Password", id="cpassword-field") }}
+        {% if form.password2.errors %}
+          <ul class="errors">
+            {% for error in form.password2.errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+        <br>
+        {{ form.submit(class="btn btn-lg btn-block btn-primary")}}
+    </section>
+</form>
+{% endblock %}

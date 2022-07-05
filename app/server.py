@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from app.controllers.middlewares.logger import LogMiddleware
 
@@ -14,4 +14,5 @@ from app.models.User import User
 server.wsgi_app = LogMiddleware(server.wsgi_app)
 
 import app.controllers.routes.index
+import app.controllers.routes.register
 import app.controllers.routes.catalog
