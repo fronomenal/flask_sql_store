@@ -9,6 +9,7 @@ setup(
         'flask-sqlalchemy',
         'gunicorn',
         'flask-wtf',
+        'flask-bcrypt',
         'wtforms[email]'
     ],
 )
