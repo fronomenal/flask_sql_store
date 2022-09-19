@@ -33,7 +33,7 @@
                     </ul>
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Login {% block login_nav %} {% endblock %}</a>
+                            <a class="nav-link" href="{{ url_for('login') }}">Login {% block login_nav %} {% endblock %}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ url_for('register') }}">Sign-Up {% block register_nav %} {% endblock %}</a>

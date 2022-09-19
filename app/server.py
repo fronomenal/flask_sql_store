@@ -18,4 +18,5 @@ server.wsgi_app = LogMiddleware(server.wsgi_app)
 
 import app.controllers.routes.index
 import app.controllers.routes.register
+import app.controllers.routes.login
 import app.controllers.routes.catalog
