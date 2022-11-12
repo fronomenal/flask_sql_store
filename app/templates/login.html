@@ -4,7 +4,7 @@
 <title>Login</title>
 {% endblock %}
 
-{% block register_nav %}<span class="sr-only">(current)</span>{% endblock %}
+{% block login_nav %}<span class="sr-only">(current)</span>{% endblock %}
 
 {% block main %}
 <form action="" method="post" class="form-signin" style="color:white;">
@@ -32,13 +32,13 @@
           </ul>
         {% endif %}
 
-        <div class="chekbox mb-3">
-          <a href="{{ url_for("register")}}" class="btn btn-sm btn-secondary"></a>
-          <h4>Do not have an account?</h4>
-        </div>
-
-        {{ form.submit(class="btn btn-lg btn-block btn-primary")}}
         <br>
+        {{ form.submit(class="btn btn-lg btn-block btn-primary")}}
+
+        <div class="chekbox mt-3">
+          <h4>Do not have an account?</h4>
+          <a href="{{ url_for("register")}}" class="btn btn-sm btn-secondary"> Create One</a>
+        </div>
     </section>
 </form>
 {% endblock %}
