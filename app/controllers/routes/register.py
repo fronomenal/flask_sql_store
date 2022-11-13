@@ -1,13 +1,18 @@
-from app.server import server, redirect, url_for, render_template, db,  User, flash
+from app.server import server, redirect, url_for, render_template, db,  User, flash, login_user
 from app.utils.forms import RegisterForm
+from app.controllers.actions.cus_auth_check import block_authenticated
 
 @server.route("/sign-up", methods=["GET", "POST"])
+@block_authenticated
 def register():
     form = RegisterForm()
     if form.validate_on_submit():
         newusr = User(usrname=form.username.data, usrpass=form.password1.data, usrmail=form.email.data)
         db.session.add(newusr)
         db.session.commit()
+
+        login_user(newusr)
+        flash(f"Account created successfully for: {newusr.usrname}", category="success")
 
         return redirect(url_for("catalog"))
 

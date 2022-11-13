@@ -1,7 +1,9 @@
 from app.server import server, redirect, url_for, render_template, db, login_user, User, flash
 from app.utils.forms import LoginForm
+from app.controllers.actions.cus_auth_check import block_authenticated
 
 @server.route("/login", methods=["GET", "POST"])
+@block_authenticated
 def login():
   form = LoginForm()
   if form.validate_on_submit():
