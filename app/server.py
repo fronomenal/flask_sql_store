@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from app.controllers.middlewares.logger import LogMiddleware
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager, login_user, UserMixin
+from flask_login import LoginManager, login_user, logout_user, UserMixin
 
 server = Flask(__name__)
 server.config.from_object(os.getenv('APP_SETTINGS', 'app.config.DevCon'))
@@ -21,4 +21,5 @@ server.wsgi_app = LogMiddleware(server.wsgi_app)
 import app.controllers.routes.index
 import app.controllers.routes.register
 import app.controllers.routes.login
+import app.controllers.routes.logout
 import app.controllers.routes.catalog
