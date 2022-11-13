@@ -1,6 +1,10 @@
-from app.server import db, bcrypt
+from app.server import db, bcrypt, login_manager, UserMixin
 
-class User(db.Model):
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer(), primary_key=True)
     usrname = db.Column(db.String(length=30), nullable=False, unique=True)
     usrbudget = db.Column(db.Integer(), nullable=False, default=999)
@@ -15,3 +19,6 @@ class User(db.Model):
     @usrpass.setter
     def usrpass(self, inpass):
         self._usrpass = bcrypt.generate_password_hash(inpass).decode("utf-8")
+
+    def verify_pass(self, password):
+        return bcrypt.check_password_hash(self._usrpass, password)

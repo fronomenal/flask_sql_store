@@ -4,12 +4,14 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from app.controllers.middlewares.logger import LogMiddleware
 from flask_bcrypt import Bcrypt
+from flask_login import LoginManager, login_user, UserMixin
 
 server = Flask(__name__)
 server.config.from_object(os.getenv('APP_SETTINGS', 'app.config.DevCon'))
 db = SQLAlchemy(server)
 migrate = Migrate(server, db)
 bcrypt = Bcrypt(server)
+login_manager = LoginManager(server)
 
 from app.models.Item import Item
 from app.models.User import User
