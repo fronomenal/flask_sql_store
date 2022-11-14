@@ -1,11 +1,16 @@
 from app.server import server, render_template, Item, request, current_user, flash, db
-from app.utils.forms import PurchaseItemForm
+from app.utils.forms import PurchaseItemForm, PostItemForm
 
 @server.route("/catalog", methods=["GET", "POST"])
 def catalog():
     purchase_form = PurchaseItemForm()
+    postitem_form = PostItemForm()
 
     if request.method == "POST":
+
+        if request.form.get("_method"):
+            pass
+
         item = int(request.form.get("purchased_item"))
         item_obj = Item.query.get(item)
 
@@ -28,4 +33,4 @@ def catalog():
             items=Item.query.all()
 
 
-        return render_template("catalog.html", items=items, purchase_form=purchase_form)
+        return render_template("catalog.html", items=items, purchase_form=purchase_form, owned_items=None, postitem_form=postitem_form)
