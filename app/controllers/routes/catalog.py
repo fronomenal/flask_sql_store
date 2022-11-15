@@ -1,4 +1,4 @@
-from app.server import server, render_template, Item, request, current_user, flash, db, redirect, url_for, Item
+from app.server import server, render_template, Item, request, current_user, flash, db, redirect, url_for, Item, User
 from app.utils.forms import PurchaseItemForm, PostItemForm, PriceChangeForm
 
 @server.route("/catalog", methods=["GET", "POST"])
@@ -22,25 +22,27 @@ def catalog():
                 return redirect(url_for("catalog"))
 
         if request.form.get("_method") == "put":
-            if postitem_form.validate_on_submit():
+            item = int(request.form.get("purchased_item"))
+            item_obj = Item.query.get(item)
+
+            if item_obj and current_user.usrbudget >= item_obj.price:
+                owner = User.query.get(item_obj.owner)
+                if not(owner.id == current_user.id): 
+                    owner.usrbudget += item_obj.price
+                    current_user.usrbudget -= item_obj.price
+                    item_obj.owner = current_user.id
+                    db.session.commit()
+
+                flash("Item purchased successfully", category="success")
+                return redirect(url_for("catalog"))
+
+        if postitem_form.validate_on_submit():
                 newitem = Item(name=postitem_form.itmname.data, price=postitem_form.price.data, barcode=postitem_form.barcode.data, description=postitem_form.description.data, owner=current_user.id)
                 db.session.add(newitem)
                 db.session.commit()
 
                 flash("Item added successfully", category="success")
                 return redirect(url_for("catalog"))
-
-        item = int(request.form.get("purchased_item"))
-        item_obj = Item.query.get(item)
-
-        if item_obj and current_user.usrbudget >= item_obj.price:
-            if not(item_obj.owner == current_user.id): 
-                item_obj.owner = current_user.id
-                current_user.usrbudget - item_obj.price;
-            db.session.commit()
-
-            flash("Item purchased successfully", category="success")
-            return redirect(url_for("catalog"))
 
         flash("Item not available or insufficient funds", category="danger")
         return redirect(url_for("catalog"))
