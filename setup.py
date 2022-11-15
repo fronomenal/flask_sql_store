@@ -9,9 +9,10 @@ setup(
         'flask-sqlalchemy',
         'gunicorn',
         'flask-migrate',
-        'psycopg2-binary'
+        'psycopg2-binary',
         'flask-wtf',
         'flask-bcrypt',
-        'wtforms[email]'
+        'wtforms[email]',
+        'Flask-Login'
     ],
 )
