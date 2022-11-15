@@ -29,6 +29,7 @@
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <form action="" method="POST">
             {{ purchase_form.hidden_tag() }}
+            <input name="_method" type="hidden" value="put">
             <input id="purchased_item" name="purchased_item" type="hidden" value="{{item.id}}">
             {{ purchase_form.submit(class="btn btn-primary") }}
           </form>
