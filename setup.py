@@ -10,6 +10,7 @@ setup(
         'gunicorn',
         'flask-wtf',
         'flask-bcrypt',
-        'wtforms[email]'
+        'wtforms[email]',
+        'Flask-Login'
     ],
 )
