@@ -54,8 +54,15 @@
     <div class="col-4">
         <h2>Owned Items</h2>
         {% if current_user.is_authenticated %}
-            <p class="text-info">Click sell item to put it on sale</p>
-            <section>TABLE</section>
+            <p class="text-info">Click Post Item button to add an Item</p>
+            <br>
+            {% for owned_item in owned_items %}
+                {% include 'includes/owned_modals.html' %}
+                <div class="bg-dark p-1 mb-2 rounded text-secondary text-center">
+                    <p> <strong> {{ owned_item.name }}</strong> | Costs {{ owned_item.price }}$</p>
+                    <button type="button" class="btn btn-outline-danger btn-block" data-bs-toggle="modal" data-bs-target="#priceModal{{ owned_item.id }}"> Change Price </button>
+                </div>
+            {% endfor %}
             <button class="btn btn-outline-success w-100"   data-bs-toggle="modal" data-bs-target="#postModal">Post an Item</button>
         {% else %}
         <p class="text-info"><a href="{{ url_for('login') }}">LogIn</a> to see or post personal items</p>

@@ -31,8 +31,9 @@ class LoginForm(FlaskForm):
 class PurchaseItemForm(FlaskForm):
     submit = SubmitField(label="Purchase Item!")
 
-class SellItemForm(FlaskForm):
-    submit = SubmitField(label="Sell Item!")
+class PriceChangeForm(FlaskForm):
+    price = IntegerField(label="New Item Price in Dollars:", validators=[DataRequired()])
+    submit = SubmitField(label="Confirm Price Change")
 
 class PostItemForm(FlaskForm):
     itmname = StringField(label="Item Name:", validators=[Length(min=3, max=30), DataRequired()])

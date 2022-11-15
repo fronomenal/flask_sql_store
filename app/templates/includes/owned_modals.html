@@ -1,0 +1,25 @@
+<div class="modal fade" id="priceModal{{ owned_item.id }}" tabindex="-1" aria-labelledby="priceModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content bg-secondary text-white">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{ owned_item.name }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="text-center"> Input new price for {{ owned_item.name }} at {{ owned_item.price }}$</p>
+        <form action="" method="POST">
+          {{ price_form.hidden_tag() }}
+          <input name="_method" type="hidden" value="patch">
+          <input id="changed_item" name="changed_item" type="hidden" value="{{owned_item.id}}"> 
+          {{price_form.price.label(for="item-price")}}
+          {{price_form.price(class="form-control w-50", placeholder="Item Price", id="item-price")}}
+          <br>
+          {{ price_form.submit(class="btn btn-primary") }}
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
