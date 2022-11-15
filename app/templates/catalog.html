@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block head %}
-<title>Catalog</title>
+<title>FlakStore | Catalog</title>
 {% endblock %}
 
 {% block catalog_nav %}<span class="sr-only">(current)</span>{% endblock %}
@@ -9,32 +9,66 @@
 {% block main %}
 
   <h1>Catalog Page</h1>
-    <table class="table table-hover table-dark">
-        <thead>
-            <tr>
-                <!-- Your Columns HERE -->
-                <th scope="col">ID</th>
-                <th scope="col">Name</th>
-                <th scope="col">Barcode</th>
-                <th scope="col">Price</th>
-                <th scope="col">Options</th>
-            </tr>
-        </thead>
-        <tbody>
-            <!-- Will complete this feature in the route later -->
-            {% for item in items %}
+  <div class="row">
+    <div class="col-8">
+        <h2>Available items on the Market</h2>
+        <p class="text-info">Click an item to start buying</p>
+        {% if items %}
+        <table class="table table-hover table-dark">
+            <thead>
                 <tr>
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.barcode }}</td>
-                    <td>{{ item.price }}$</td>
-                    <td>
-                        <button class="btn btn-outline btn-info">More Info</button>
-                        <button class="btn btn-outline btn-success">Purchase this Item</button>
-                    </td>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Barcode</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Options</th>
                 </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    {% include "includes/item_modals.html" %}
+                    <tr>
+                        <td>{{ item.id }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.barcode }}</td>
+                        <td>{{ item.price }}$</td>
+                        <td>
+                            <button class="btn btn-outline btn-info"  data-bs-toggle="modal" data-bs-target="#moreInfo{{ item.id }}">More Info</button>
+                            {% if current_user.is_authenticated %}
+                                
+                            <button class="btn btn-outline btn-success"   data-bs-toggle="modal" data-bs-target="#buyModal{{ item.id }}">Purchase this Item</button>
+                            {% else %}
+                            
+                            <a class="btn btn-outline btn-outline-info" href="{{ url_for('login') }}">Login to Purchase Item</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+            <p>There are currently no items for sale. Please check later</p>
+        {% endif %}
+    </div>
+    {% include "includes/post_modal.html" %}
+    <div class="col-4">
+        <h2>Owned Items</h2>
+        {% if current_user.is_authenticated %}
+            <p class="text-info">Click Post Item button to add an Item</p>
+            <br>
+            {% for owned_item in owned_items %}
+                {% include 'includes/owned_modals.html' %}
+                <div class="bg-dark p-1 mb-2 rounded text-secondary text-center">
+                    <p> <strong> {{ owned_item.name }}</strong> | Costs {{ owned_item.price }}$</p>
+                    <button type="button" class="btn btn-outline-danger btn-block" data-bs-toggle="modal" data-bs-target="#priceModal{{ owned_item.id }}"> Change Price </button>
+                </div>
             {% endfor %}
-        </tbody>
-    </table>
+            <button class="btn btn-outline-success w-100"   data-bs-toggle="modal" data-bs-target="#postModal">Post an Item</button>
+        {% else %}
+        <p class="text-info"><a href="{{ url_for('login') }}">LogIn</a> to see or post personal items</p>
+        {% endif %}
+    </div>
+</div>
+
 
 {% endblock %}
