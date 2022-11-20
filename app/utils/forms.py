@@ -38,6 +38,6 @@ class PriceChangeForm(FlaskForm):
 class PostItemForm(FlaskForm):
     itmname = StringField(label="Item Name:", validators=[Length(min=3, max=30), DataRequired()])
     price = IntegerField(label="Item Price in Dollars:", validators=[DataRequired()])
-    barcode = StringField(label="Item Name:", validators=[Length(min=12, max=12)])
+    barcode = StringField(label="Item Barcode:", validators=[Length(min=12, max=12)])
     description = TextAreaField(label="Item Description:")
     submit = SubmitField(label="Post Item")
